@@ -257,7 +257,7 @@ def batch_test_sudoku(folder_path, output_file_path="sudoku_test_results.xlsx"):
              print(f"    >> {txt_file} (Com PP): Resolvido APENAS pelo pré-processamento!")
 
         print(f"    Números Preenchidos (PP): {results_pp['numbers_filled_by_pp']}")
-        print(f"    Status: {results_pp['final_status']}, Número da Geração: {results_pp['ag_generations_taken']}, Quantidade de Gerações: {results_pp['ag_generations_taken'] + 1}, Indivíduos AG: {results_pp['ag_total_individuals_generated']}")
+        print(f"    Status: {results_pp['final_status']}, Número da Geração: {results_pp['ag_generations_taken']}, Quantidade de Gerações: {results_pp['ag_generations_taken'] + 1 if isinstance(results_pp['ag_generations_taken'], int) else results_no_pp['ag_generations_taken']}, Indivíduos AG: {results_pp['ag_total_individuals_generated']}")
         print(f"    Tempos: PP: {results_pp['time_pp_s']}s, AG: {results_pp['time_ag_s']}s, Total: {results_pp['time_total_s']}s")
 
 
@@ -270,7 +270,7 @@ def batch_test_sudoku(folder_path, output_file_path="sudoku_test_results.xlsx"):
             "Tipo_Execucao": "Com_PP",
             "Numeros_Preenchidos_PP": results_pp['numbers_filled_by_pp'],
             "Resolvido_Apenas_PP": results_pp['solved_by_pp_only'],
-            "AG_Geracoes": results_pp['ag_generations_taken'] + 1,
+            "AG_Geracoes": results_pp['ag_generations_taken'],
             "AG_Taxa_Mutacao_Final": results_pp['ag_final_mutation_rate'],
             "AG_Sigma_Final": results_pp['ag_final_sigma'],
             "AG_PHI_Taxa_Sucesso_Final": results_pp['ag_final_phi_success_rate'],
@@ -287,7 +287,7 @@ def batch_test_sudoku(folder_path, output_file_path="sudoku_test_results.xlsx"):
 
         print(f"  {txt_file} - SEM Pré-processamento...")
         results_no_pp = run_solver_for_puzzle(np.copy(puzzle_data), use_preprocessing=False)
-        print(f"    Status: {results_no_pp['final_status']}, Número da Geração: {results_no_pp['ag_generations_taken']}, Quantidade de Gerações: {results_no_pp['ag_generations_taken'] + 1}, Indivíduos AG: {results_no_pp['ag_total_individuals_generated']}")
+        print(f"    Status: {results_no_pp['final_status']}, Número da Geração: {results_no_pp['ag_generations_taken']}, Quantidade de Gerações: {results_no_pp['ag_generations_taken'] + 1 if isinstance(results_no_pp['ag_generations_taken'], int) else results_no_pp['ag_generations_taken']}, Indivíduos AG: {results_no_pp['ag_total_individuals_generated']}")
         print(f"    Tempos: PP: {results_no_pp['time_pp_s']}s, AG: {results_no_pp['time_ag_s']}s, Total: {results_no_pp['time_total_s']}s\n")
 
         row_no_pp_data = {
@@ -298,7 +298,7 @@ def batch_test_sudoku(folder_path, output_file_path="sudoku_test_results.xlsx"):
             "GA_Limite_Estagnacao_Reiniciar": ga_limite_estagnacao_valor,
             "Tipo_Execucao": "Sem_PP",
             "Numeros_Preenchidos_PP": 0, "Resolvido_Apenas_PP": False,
-            "AG_Geracoes": results_no_pp['ag_generations_taken'] + 1,
+            "AG_Geracoes": results_no_pp['ag_generations_taken'],
             "AG_Taxa_Mutacao_Final": results_no_pp['ag_final_mutation_rate'],
             "AG_Sigma_Final": results_no_pp['ag_final_sigma'],
             "AG_PHI_Taxa_Sucesso_Final": results_no_pp['ag_final_phi_success_rate'],
