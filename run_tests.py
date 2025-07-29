@@ -8,7 +8,7 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from tests.test_solver_performance import batch_test_sudoku
 
 if __name__ == "__main__":
-    default_puzzle_folder = os.path.join("examples", "mantere")
+    default_puzzle_folder = os.path.join("puzzles", "mantere_collection")
     user_input_path = input(f"Digite o caminho para a pasta contendo os arquivos Sudoku .txt (padrão: {default_puzzle_folder}): ")
     puzzle_folder_path = user_input_path if user_input_path else default_puzzle_folder
 
